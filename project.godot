@@ -17,3 +17,7 @@ config/icon="res://UI/icon.svg"
 [dotnet]
 
 project/assembly_name="BottleRocket"
+
+[physics]
+
+2d/physics_engine="Rapier2D"
