@@ -9,8 +9,9 @@ size = Vector2(85, 214)
 [node name="Node2D" type="Node2D"]
 
 [node name="Bottle" type="Area2D" parent="."]
-position = Vector2(671, 536)
+position = Vector2(528, 509)
 rotation = -0.0149453
+scale = Vector2(0.649641, 0.67411)
 script = ExtResource("1_j2t2r")
 
 [node name="BottleSprite" type="Sprite2D" parent="Bottle"]
@@ -18,7 +19,12 @@ scale = Vector2(0.065, 0.065)
 texture = ExtResource("2_yw13q")
 
 [node name="Collision" type="CollisionShape2D" parent="Bottle"]
-position = Vector2(-0.5, 0)
+position = Vector2(-0.5, -6.10352e-05)
+scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_31nfx")
 
+[node name="Timer" type="Timer" parent="Bottle"]
+
 [connection signal="input_event" from="Bottle" to="Bottle" method="_on_input_event"]
+[connection signal="mouse_entered" from="Bottle" to="Bottle" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Bottle" to="Bottle" method="_on_mouse_exited"]
