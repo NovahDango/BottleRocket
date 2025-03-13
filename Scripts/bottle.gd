@@ -1,4 +1,9 @@
-extends Area2D
+extends RigidBody2D
+
+# --- Exports ---
+@export var launch_node: Node2D
+
+
 
 # --- Variables ---
 var dragging := false
@@ -14,7 +19,7 @@ var target_position: Vector2
 # --- Initialization ---
 func _ready():
 	target_position = global_position  # Ensure correct starting position of Bottle
-
+	set_freeze_enabled(false)
 # --- Input Handling ---
 func _input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton and mouse_inside:
@@ -36,11 +41,14 @@ func _unhandled_input(event: InputEvent):
 # --- Dragging Functions ---
 func start_dragging(mouse_pos: Vector2):
 	dragging = true
+	set_freeze_enabled(true)
 	last_mouse_position = mouse_pos  # Store click position
 	target_position = global_position  # Keep the object stable at start
 
 func stop_dragging():
 	dragging = false
+	launch_node.launch_bottle(total_shake_distance)
+	
 
 
 func update_shake_distance(current_mouse_position: Vector2):
@@ -60,7 +68,7 @@ func _process(delta):
 	if dragging:
 		target_position = get_global_mouse_position()  # Update target position
 
-	move_toward_target(delta)
+		move_toward_target(delta)
 
 func move_toward_target(delta):
 	var distance = global_position.distance_to(target_position)

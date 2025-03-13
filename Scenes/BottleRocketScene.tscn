@@ -1,30 +1,17 @@
-[gd_scene load_steps=4 format=3 uid="uid://ckdv5g0s5tiaj"]
+[gd_scene load_steps=3 format=3 uid="uid://ckdv5g0s5tiaj"]
 
-[ext_resource type="Script" uid="uid://caf3el1cj03ev" path="res://Scripts/bottle.gd" id="1_j2t2r"]
-[ext_resource type="Texture2D" uid="uid://xbs10wiis2dr" path="res://Assets/TempBottle.png" id="2_yw13q"]
+[ext_resource type="PackedScene" uid="uid://vjlwygwsm8nq" path="res://Scenes/Bottle.tscn" id="1_54hsx"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_31nfx"]
-size = Vector2(85, 214)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_54hsx"]
+size = Vector2(1436, 32)
 
 [node name="Node2D" type="Node2D"]
 
-[node name="Bottle" type="Area2D" parent="."]
-position = Vector2(528, 509)
-rotation = -0.0149453
-scale = Vector2(0.649641, 0.67411)
-script = ExtResource("1_j2t2r")
+[node name="Bottle" parent="." instance=ExtResource("1_54hsx")]
+position = Vector2(365, 496)
 
-[node name="BottleSprite" type="Sprite2D" parent="Bottle"]
-scale = Vector2(0.065, 0.065)
-texture = ExtResource("2_yw13q")
+[node name="Platform" type="StaticBody2D" parent="."]
 
-[node name="Collision" type="CollisionShape2D" parent="Bottle"]
-position = Vector2(-0.5, -6.10352e-05)
-scale = Vector2(1, 1)
-shape = SubResource("RectangleShape2D_31nfx")
-
-[node name="Timer" type="Timer" parent="Bottle"]
-
-[connection signal="input_event" from="Bottle" to="Bottle" method="_on_input_event"]
-[connection signal="mouse_entered" from="Bottle" to="Bottle" method="_on_mouse_entered"]
-[connection signal="mouse_exited" from="Bottle" to="Bottle" method="_on_mouse_exited"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform"]
+position = Vector2(605, 643)
+shape = SubResource("RectangleShape2D_54hsx")

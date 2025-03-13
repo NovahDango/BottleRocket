@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://woo2nixjy8cu"]
+
+[ext_resource type="Script" uid="uid://cdcdsdwttfi6l" path="res://Scripts/launch_system.gd" id="1_ilnth"]
+
+[node name="LaunchNode" type="Node2D"]
+script = ExtResource("1_ilnth")

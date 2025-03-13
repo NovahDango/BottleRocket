@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://vjlwygwsm8nq"]
+
+[ext_resource type="Script" uid="uid://caf3el1cj03ev" path="res://Scripts/bottle.gd" id="1_d78q1"]
+[ext_resource type="Texture2D" uid="uid://xbs10wiis2dr" path="res://Assets/TempBottle.png" id="2_cnbgp"]
+[ext_resource type="PackedScene" uid="uid://woo2nixjy8cu" path="res://Scenes/LaunchNode.tscn" id="2_g65u0"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_cnbgp"]
+bounce = 0.45
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cnbgp"]
+radius = 44.8
+height = 214.4
+
+[node name="Bottle" type="RigidBody2D" node_paths=PackedStringArray("launch_node")]
+disable_mode = 2
+physics_material_override = SubResource("PhysicsMaterial_cnbgp")
+script = ExtResource("1_d78q1")
+launch_node = NodePath("LaunchNode")
+
+[node name="LaunchNode" parent="." node_paths=PackedStringArray("bottle") instance=ExtResource("2_g65u0")]
+position = Vector2(37, 1)
+bottle = NodePath("..")
+
+[node name="BottleSprite" type="Sprite2D" parent="."]
+scale = Vector2(0.04, 0.04)
+texture = ExtResource("2_cnbgp")
+
+[node name="Collision" type="CollisionShape2D" parent="."]
+position = Vector2(1.90735e-06, 1.90735e-06)
+scale = Vector2(0.625, 0.625)
+shape = SubResource("CapsuleShape2D_cnbgp")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="BottleRocket"
+run/main_scene="uid://ckdv5g0s5tiaj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://UI/icon.svg"
 
