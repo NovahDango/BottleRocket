@@ -11,9 +11,13 @@ config_version=5
 [application]
 
 config/name="BottleRocket"
-run/main_scene="uid://ckdv5g0s5tiaj"
+run/main_scene="uid://b1wk5bga23l5y"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://UI/icon.svg"
+config/icon="res://Scenes/UI/icon.svg"
+
+[autoload]
+
+GameManager="*res://Scripts/GameManager.gd"
 
 [dotnet]
 
