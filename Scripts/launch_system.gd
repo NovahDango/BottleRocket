@@ -2,11 +2,8 @@ extends Node2D
 
 @export var bottle: RigidBody2D  # Reference to your Bottle (must be a RigidBody2D)
 @export var powerup_multiplier: float = 1.0  # Multiplier to boost launch force with power-ups
-<<<<<<< Updated upstream
 @export var max_launch_force: float = 5000.0  # Cap for the launch force
-=======
-@export var max_launch_force: float = 100000.0  # Cap for the launch force
->>>>>>> Stashed changes
+
 
 
 

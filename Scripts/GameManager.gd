@@ -3,12 +3,10 @@ extends Node
 signal game_started
 signal game_over
 
-enum gameState {STATE_MAINMENU, STATE_SHAKE, STATE_PILOT, STATE_UPGRADE}
+@onready var bottle = $Bottle
 
 
 
-func main_Menu():
-	print("")
 
 func start_game():
 	print("Starting Game")
