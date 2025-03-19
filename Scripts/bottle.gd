@@ -1,83 +1,73 @@
 extends RigidBody2D
 
-# --- Exports ---
 @export var launch_node: Node2D
 
+# Variables
+var dragging = false
+var base_speed = 1.0
+var max_speed = 250.0
+var max_distance = 500.0
 
+var last_mouse_pos: Vector2
+var total_shake = 0.0
+var mouse_inside = false
+var target_pos: Vector2
 
-# --- Variables ---
-var dragging := false
-var base_follow_speed := 1.0
-var max_follow_speed := 250.0
-var max_distance := 500.0
-
-var last_mouse_position: Vector2
-var total_shake_distance := 0.0
-var mouse_inside := false
-var target_position: Vector2
-
-# --- Initialization ---
 func _ready():
-	target_position = global_position  # Ensure correct starting position of Bottle
+	# Set the starting position and disable physics freezing.
+	target_pos = global_position
 	set_freeze_enabled(false)
-# --- Input Handling ---
-func _input_event(viewport, event, shape_idx):
-	if event is InputEventMouseButton and mouse_inside:
-		start_dragging(event.position)
-		update_shake_distance(event.position)
-		
-	if event is InputEventMouseButton and not event.pressed:
-		stop_dragging()
-		
 
-func _unhandled_input(event: InputEvent):
-	if event is InputEventMouseMotion and dragging:
-		update_shake_distance(event.position)
+func _process(delta):
+	# Check for starting and stopping drag based on the left click.
+	if not dragging and mouse_inside and Input.is_action_just_pressed("left_click"):
+		_start_dragging(get_global_mouse_position())
+	elif dragging and not Input.is_action_pressed("left_click"):
+		_stop_dragging()
+	
+	# If dragging, update the target position and shake amount.
+	if dragging:
+		var mouse_pos = get_global_mouse_position()
+		_update_shake(mouse_pos)
+		target_pos = mouse_pos
+		_move_toward_target(delta)
 
-	if event is InputEventMouseButton and not event.pressed:
-		stop_dragging()
-		
-
-# --- Dragging Functions ---
-func start_dragging(mouse_pos: Vector2):
+# Called when dragging begins.
+func _start_dragging(mouse_pos: Vector2):
 	dragging = true
 	set_freeze_enabled(true)
-	last_mouse_position = mouse_pos  # Store click position
-	target_position = global_position  # Keep the object stable at start
+	# Prevent a sudden jump by starting at the current position.
+	target_pos = global_position
+	last_mouse_pos = mouse_pos
+	_update_shake(mouse_pos)
 
-func stop_dragging():
+# Called when dragging stops.
+func _stop_dragging():
 	dragging = false
-	launch_node.launch_bottle(total_shake_distance)
-	
+	set_freeze_enabled(false)
+	launch_node.launch_bottle(total_shake)
+# Update the total shake distance based on mouse movement.
+func _update_shake(current_mouse: Vector2):
+	var delta_mouse = current_mouse - last_mouse_pos
+	total_shake += delta_mouse.length() / 35.0  # Adjust scale if needed.
+	last_mouse_pos = current_mouse
+	print("Total Shake: ", "%.2f" % total_shake)
 
+# Resets the shake distance (if needed elsewhere).
+func reset_shake():
+	total_shake = 0.0 
 
-func update_shake_distance(current_mouse_position: Vector2):
-	var delta_pos = current_mouse_position - last_mouse_position
-	var shake_movement = delta_pos.length() / 100
-	
-	total_shake_distance += shake_movement  # CALCULATES TOTAL SHAKE DISTANCE P SIMPLE
-	last_mouse_position = current_mouse_position
-	print("Total Shake Distance: ","%.2f" % total_shake_distance )
-	
-func reset_shake_distance():
-	total_shake_distance = 0.0 
-	
+# Smoothly move the object toward the target position.
+func _move_toward_target(delta):
+	var dist = global_position.distance_to(target_pos)
+	# Create a factor between 0 and 1 based on distance (clamped by max_distance).
+	var factor = clamp(dist / max_distance, 0.0, 1.0)
+	# Interpolate between the base speed and max speed.
+	var speed = lerp(base_speed, max_speed, factor)
+	# Lerp toward the target position based on the calculated speed.
+	global_position = global_position.lerp(target_pos, delta * speed)
 
-# --- Movement Logic ---
-func _process(delta):
-	if dragging:
-		target_position = get_global_mouse_position()  # Update target position
-
-		move_toward_target(delta)
-
-func move_toward_target(delta):
-	var distance = global_position.distance_to(target_position)
-	var lerp_factor = clamp(distance / max_distance, 0.0, 1.0)
-	var follow_speed = lerp(base_follow_speed, max_follow_speed, lerp_factor)
-
-	global_position = global_position.lerp(target_position, delta * follow_speed)
-
-# --- Mouse Events ---
+# Mouse area signals to know if the mouse is over this object.
 func _on_mouse_entered():
 	mouse_inside = true
 
