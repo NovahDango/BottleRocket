@@ -19,6 +19,10 @@ config/icon="res://Scenes/UI/icon.svg"
 
 GameManager="*res://Scripts/GameManager.gd"
 
+[display]
+
+window/stretch/mode="viewport"
+
 [dotnet]
 
 project/assembly_name="BottleRocket"

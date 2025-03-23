@@ -2,11 +2,19 @@ extends RigidBody2D
 
 @export var launch_node: Node2D
 
+@export var camera: Camera2D
+var CameraScene = preload("res://Scenes/Camera.tscn")
+
+
+@onready var shake_timer: Timer = $ShakeTimer
+
 # Variables
 var dragging = false
 var base_speed = 1.0
 var max_speed = 250.0
 var max_distance = 500.0
+var original_position: Vector2
+var return_speed = 50.0
 
 var last_mouse_pos: Vector2
 var total_shake = 0.0
@@ -14,9 +22,13 @@ var mouse_inside = false
 var target_pos: Vector2
 
 func _ready():
+	#$RemoteTransform2D.remote_path = camera.get_path()
 	# Set the starting position and disable physics freezing.
+	original_position = global_position
 	target_pos = global_position
 	set_freeze_enabled(false)
+	
+	
 
 func _process(delta):
 	# Check for starting and stopping drag based on the left click.
@@ -24,6 +36,8 @@ func _process(delta):
 		_start_dragging(get_global_mouse_position())
 	elif dragging and not Input.is_action_pressed("left_click"):
 		_stop_dragging()
+		
+		
 	
 	# If dragging, update the target position and shake amount.
 	if dragging:
@@ -40,12 +54,19 @@ func _start_dragging(mouse_pos: Vector2):
 	target_pos = global_position
 	last_mouse_pos = mouse_pos
 	_update_shake(mouse_pos)
+	# Start shake timer
+	shake_timer.start()
 
 # Called when dragging stops.
 func _stop_dragging():
 	dragging = false
-	set_freeze_enabled(false)
-	launch_node.launch_bottle(total_shake)
+	get_parent().remove_child(camera)
+	var camera_instance = CameraScene.instantiate()
+	
+	add_child(camera_instance)
+	dragging = false
+	
+	
 # Update the total shake distance based on mouse movement.
 func _update_shake(current_mouse: Vector2):
 	var delta_mouse = current_mouse - last_mouse_pos
@@ -73,3 +94,15 @@ func _on_mouse_entered():
 
 func _on_mouse_exited():
 	mouse_inside = false
+
+
+func _on_shake_timer_timeout() -> void:
+	_stop_dragging()
+	
+	var tween = create_tween()
+	
+	tween.tween_property(self, "position", Vector2(original_position), 1)
+	tween.tween_property(self, "rotation_degrees", 180, 1)
+	await tween.finished
+	await get_tree().create_timer(1).timeout
+	launch_node.launch_bottle(total_shake)

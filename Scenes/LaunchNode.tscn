@@ -4,3 +4,5 @@
 
 [node name="LaunchNode" type="Node2D"]
 script = ExtResource("1_ilnth")
+
+[node name="LaunchTimer" type="Timer" parent="."]

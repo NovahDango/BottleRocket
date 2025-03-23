@@ -20,7 +20,7 @@ func launch_bottle(shake_force: float) -> void:
 	
 	# Generate a slight random horizontal offset.
 	# Adjust range as needed, here -0.2 to 0.2 creates small left/right deviation.
-	var random_offset = randf_range(-0.1, 0.1)
+	var random_offset = randf_range(-0.05, 0.05)
 	
 	var launch_direction = Vector2(random_offset, 1).normalized()
 	

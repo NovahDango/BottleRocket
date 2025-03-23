@@ -22,21 +22,18 @@ position = Vector2(37, 1)
 bottle = NodePath("..")
 
 [node name="BottleSprite" type="Sprite2D" parent="."]
-scale = Vector2(0.04, 0.04)
+scale = Vector2(0.0172589, 0.0172589)
 texture = ExtResource("2_cnbgp")
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(1.90735e-06, 1.90735e-06)
-scale = Vector2(0.625, 0.625)
+scale = Vector2(0.269671, 0.269671)
 shape = SubResource("CapsuleShape2D_cnbgp")
 
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
-remote_path = NodePath("../Camera2D")
-
-[node name="Camera2D" type="Camera2D" parent="."]
-process_callback = 0
-position_smoothing_enabled = true
-position_smoothing_speed = 12.0
+[node name="ShakeTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
 
 [connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]
+[connection signal="timeout" from="ShakeTimer" to="." method="_on_shake_timer_timeout"]
