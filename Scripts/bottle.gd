@@ -7,20 +7,21 @@ var CameraScene = preload("res://Scenes/Camera.tscn")
 
 
 @onready var shake_timer: Timer = $ShakeTimer
-
+#region
 # Variables
 var dragging = false
 var base_speed = 1.0
 var max_speed = 250.0
 var max_distance = 500.0
 var original_position: Vector2
-var return_speed = 50.0
+var return_speed : float = 50.0
+var shakeTime : float = 5
 
 var last_mouse_pos: Vector2
 var total_shake = 0.0
 var mouse_inside = false
 var target_pos: Vector2
-
+#endregion
 func _ready():
 	#$RemoteTransform2D.remote_path = camera.get_path()
 	# Set the starting position and disable physics freezing.
@@ -29,7 +30,6 @@ func _ready():
 	set_freeze_enabled(false)
 	
 	
-
 func _process(delta):
 	# Check for starting and stopping drag based on the left click.
 	if not dragging and mouse_inside and Input.is_action_just_pressed("left_click"):
@@ -55,7 +55,7 @@ func _start_dragging(mouse_pos: Vector2):
 	last_mouse_pos = mouse_pos
 	_update_shake(mouse_pos)
 	# Start shake timer
-	shake_timer.start()
+	shake_timer.start(shakeTime)
 
 # Called when dragging stops.
 func _stop_dragging():

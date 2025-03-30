@@ -2,10 +2,7 @@ extends Node2D
 
 @export var bottle: RigidBody2D  # Reference to your Bottle (must be a RigidBody2D)
 @export var powerup_multiplier: float = 1.0  # Multiplier to boost launch force with power-ups
-@export var max_launch_force: float = 5000.0  # Cap for the launch force
-
-
-
+#@export var max_launch_force: float = 5000.0  # Cap for the launch force
 
 func launch_bottle(shake_force: float) -> void:
 	
@@ -15,7 +12,7 @@ func launch_bottle(shake_force: float) -> void:
 
 	# Calculate the launch force based on shake force and power-up multiplier.
 	# Adjust the scaling factor (here, 100) as needed for your game.
-	var launch_force = min(shake_force * 2 * powerup_multiplier, max_launch_force)
+	var launch_force = (shake_force * powerup_multiplier)
 	bottle.set_freeze_enabled(false)
 	
 	# Generate a slight random horizontal offset.
@@ -26,5 +23,5 @@ func launch_bottle(shake_force: float) -> void:
 	
 	# Apply an upward impulse at the center of the bottle.
 	bottle.apply_impulse(-launch_direction * launch_force, Vector2.ZERO)
-
+	bottle.reset_shake()
 	print("Launched with Force:", launch_force)
