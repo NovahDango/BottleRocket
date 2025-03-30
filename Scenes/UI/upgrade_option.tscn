@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://d0881jh7adlaa"]
 
-[ext_resource type="Texture2D" uid="uid://cv346bqyh2m84" path="res://Assets/Icons/SodaBottleIcon.png" id="1_udtc3"]
+[ext_resource type="Texture2D" uid="uid://xem42diyr4ao" path="res://Assets/Icons/SodaBottleIcon.png" id="1_udtc3"]
 
 [node name="Control" type="Control"]
-custom_minimum_size = Vector2(364, 400)
+custom_minimum_size = Vector2(264, 300)
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -17,7 +17,7 @@ offset_bottom = 82.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Ugprade" type="Button" parent="."]
+[node name="Upgrade" type="Button" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -25,13 +25,11 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Ugprade"]
+[node name="MarginContainer" type="MarginContainer" parent="Upgrade"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -9.0
-offset_bottom = 9.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 6
@@ -39,20 +37,29 @@ theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Ugprade/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Upgrade/MarginContainer"]
 layout_mode = 2
 
-[node name="Title" type="Label" parent="Ugprade/MarginContainer/VBoxContainer"]
+[node name="Title" type="Label" parent="Upgrade/MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
 text = "Upgrade Title"
 horizontal_alignment = 1
 
-[node name="Icon" type="TextureRect" parent="Ugprade/MarginContainer/VBoxContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="Upgrade/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 25
+
+[node name="Icon" type="TextureRect" parent="Upgrade/MarginContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(50, 100)
 layout_mode = 2
 texture = ExtResource("1_udtc3")
-expand_mode = 5
+expand_mode = 1
 
-[node name="Description" type="Label" parent="Ugprade/MarginContainer/VBoxContainer"]
+[node name="Description" type="Label" parent="Upgrade/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "lorem ipsum"
 horizontal_alignment = 1

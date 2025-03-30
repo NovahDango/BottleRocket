@@ -23,5 +23,6 @@ func launch_bottle(shake_force: float) -> void:
 	
 	# Apply an upward impulse at the center of the bottle.
 	bottle.apply_impulse(-launch_direction * launch_force, Vector2.ZERO)
+	
 	bottle.reset_shake()
 	print("Launched with Force:", launch_force)

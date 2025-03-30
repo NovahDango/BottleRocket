@@ -15,7 +15,7 @@ var max_speed = 250.0
 var max_distance = 500.0
 var original_position: Vector2
 var return_speed : float = 50.0
-var shakeTime : float = 5
+var shakeTime : float = 5 
 
 var last_mouse_pos: Vector2
 var total_shake = 0.0
