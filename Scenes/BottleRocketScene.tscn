@@ -1,14 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://ckdv5g0s5tiaj"]
+[gd_scene load_steps=8 format=3 uid="uid://ckdv5g0s5tiaj"]
 
 [ext_resource type="PackedScene" uid="uid://vjlwygwsm8nq" path="res://Scenes/Bottle.tscn" id="1_54hsx"]
+[ext_resource type="Script" uid="uid://dvmpigk7socbk" path="res://Scenes/bottle_rocket_scene.gd" id="1_ddb5h"]
 [ext_resource type="Texture2D" uid="uid://cltjmemm2t1jk" path="res://Assets/JKMAP.jpeg" id="1_j2t2r"]
 [ext_resource type="AudioStream" uid="uid://bnyu5b5wm786w" path="res://Assets/Music/Chill Melody DnB.ogg" id="3_yw13q"]
 [ext_resource type="PackedScene" uid="uid://bg34pndlle06l" path="res://Scenes/Camera.tscn" id="4_31nfx"]
+[ext_resource type="PackedScene" uid="uid://c8f5w3seld8bk" path="res://Scenes/UI/UpgradeUI.tscn" id="5_ctc8u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_54hsx"]
 size = Vector2(1436, 32)
 
 [node name="Main" type="Node2D"]
+script = ExtResource("1_ddb5h")
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -34,3 +37,9 @@ autoplay = true
 
 [node name="Camera" parent="." instance=ExtResource("4_31nfx")]
 position = Vector2(575, 331)
+
+[node name="UpgradeShopUi" parent="." instance=ExtResource("5_ctc8u")]
+offset_left = 577.0
+offset_top = 338.0
+offset_right = 577.0
+offset_bottom = 338.0

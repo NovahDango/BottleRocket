@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://che8ubhfarw41"]
+
+[ext_resource type="Texture2D" uid="uid://mhhrmu4bkdp7" path="res://Assets/Icons/mentos.png" id="1_cbl3x"]
+[ext_resource type="Script" uid="uid://d3tlbt87qsumj" path="res://Scripts/Resources/Upgrade.gd" id="1_wybrf"]
+
+[resource]
+script = ExtResource("1_wybrf")
+Name = "Mentos"
+Icon = ExtResource("1_cbl3x")
+desc = "LOREM IPSUM TYPE SHI"
+powerup_multiplier = 10.0
+metadata/_custom_type_script = "uid://d3tlbt87qsumj"

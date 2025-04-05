@@ -4,6 +4,9 @@ extends Node2D
 @export var powerup_multiplier: float = 1.0  # Multiplier to boost launch force with power-ups
 #@export var max_launch_force: float = 5000.0  # Cap for the launch force
 
+func set_powerup_multiplier(value: float):
+	powerup_multiplier = value
+
 func launch_bottle(shake_force: float) -> void:
 	
 	if not bottle:

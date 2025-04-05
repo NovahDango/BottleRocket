@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Upgrade" load_steps=3 format=3 uid="uid://b3ok4rlyxkfjl"]
+
+[ext_resource type="Texture2D" uid="uid://bqf3g82s4dmeg" path="res://Assets/Icons/Pressurecap.png" id="1_sos3i"]
+[ext_resource type="Script" uid="uid://d3tlbt87qsumj" path="res://Scripts/Resources/Upgrade.gd" id="1_ylfbn"]
+
+[resource]
+script = ExtResource("1_ylfbn")
+Name = "Pressure Cap"
+Icon = ExtResource("1_sos3i")
+desc = "Holds Fizz Loonger type ipsum"
+metadata/_custom_type_script = "uid://d3tlbt87qsumj"

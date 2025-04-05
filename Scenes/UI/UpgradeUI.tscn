@@ -83,3 +83,5 @@ text = "Store"
 layout_mode = 2
 size_flags_horizontal = 4
 text = "Next Attempt"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ShopDestination/MarginContainer/HBoxContainer/VendingButton" to="." method="_on_vending_button_pressed"]

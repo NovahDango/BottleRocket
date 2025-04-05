@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0881jh7adlaa"]
+[gd_scene load_steps=3 format=3 uid="uid://d0881jh7adlaa"]
 
 [ext_resource type="Texture2D" uid="uid://xem42diyr4ao" path="res://Assets/Icons/SodaBottleIcon.png" id="1_udtc3"]
+[ext_resource type="Script" uid="uid://cshrrhp2ey7qm" path="res://Scenes/UI/upgrade_option.gd" id="1_vjr73"]
 
 [node name="Control" type="Control"]
 custom_minimum_size = Vector2(264, 300)
@@ -16,6 +17,7 @@ offset_right = 82.0
 offset_bottom = 82.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_vjr73")
 
 [node name="Upgrade" type="Button" parent="."]
 layout_mode = 1
@@ -63,3 +65,5 @@ expand_mode = 1
 layout_mode = 2
 text = "lorem ipsum"
 horizontal_alignment = 1
+
+[connection signal="pressed" from="Upgrade" to="." method="_on_upgrade_pressed"]
